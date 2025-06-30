@@ -1,0 +1,615 @@
+/* --- CONFIGURAÇÕES GLOBAIS E VARIÁVEIS DE COR --- */
+:root {
+  /* Paleta Moderna e Ousada */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --sidebar-bg: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+
+  /* Cores de texto */
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-light: #ecf0f1;
+  --text-accent: #3498db;
+
+  /* Sombras e efeitos */
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 20px rgba(52, 152, 219, 0.3);
+
+  /* Transições */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Espaçamentos */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+}
+
+/* --- RESET E CONFIGURAÇÕES BASE --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--primary-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  min-height: calc(100vh - 3rem);
+  position: relative;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- SIDEBAR MODERNA --- */
+.sidebar {
+  background: var(--sidebar-bg);
+  color: var(--text-light);
+  padding: 3rem 2rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.3;
+}
+
+.sidebar-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+/* --- FOTO DE PERFIL MODERNA --- */
+.profile-pic {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  background: var(--primary-gradient);
+  padding: 4px;
+  object-fit: cover;
+  margin-bottom: 2rem;
+  transition: var(--transition-medium);
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.3);
+}
+
+.profile-pic:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(52, 152, 219, 0.5);
+}
+
+/* --- NOME E TÍTULO --- */
+.name {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  font-weight: 500;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--accent-gradient);
+  border-radius: 1px;
+}
+
+/* --- SEÇÕES DA SIDEBAR --- */
+.sidebar-section {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 3rem;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: var(--transition-medium);
+}
+
+.sidebar-section:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.sidebar-section h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-accent);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+}
+
+.sidebar-section h3::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: var(--accent-gradient);
+  border-radius: 2px;
+}
+
+/* --- LISTAS DE CONTATO E HABILIDADES --- */
+.contact-list,
+.skills-list {
+  list-style: none;
+}
+
+.contact-list li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  transition: var(--transition-fast);
+}
+
+.contact-list li:hover {
+  transform: translateX(5px);
+}
+
+.contact-list i {
+  color: var(--text-accent);
+  margin-right: 1rem;
+  font-size: 1.1em;
+  width: 20px;
+  text-align: center;
+}
+
+.skills-list li {
+  margin-bottom: 0.5rem;
+  background: var(--glass-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid var(--glass-border);
+  transition: var(--transition-fast);
+}
+
+.skills-list li:hover {
+  background: var(--accent-gradient);
+  color: white;
+  transform: scale(1.02);
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+.main-content {
+  padding: 3rem 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.main-content section {
+  margin-bottom: 4rem;
+  background: #fff;
+  color: #222;
+  border: 1.5px solid #e0e7ef;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.07);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: var(--transition-medium);
+}
+
+.main-content section:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.main-content h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+.main-content h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+}
+
+/* --- EXPERIÊNCIAS PROFISSIONAIS --- */
+.job {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f5f7fa;
+  color: #222;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+  background-image: linear-gradient(
+    90deg,
+    var(--primary-gradient) 0%,
+    transparent 100%
+  );
+  background-size: 4px 100%;
+  background-repeat: no-repeat;
+  transition: var(--transition-medium);
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.05);
+}
+
+.job:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-soft);
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.job-header h3 {
+  font-size: 1.3rem;
+  color: #222 !important;
+  font-weight: 700;
+  margin: 0;
+}
+
+.job-header span {
+  font-weight: 600;
+  color: #2563eb !important;
+  background: #e3f0ff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.job h4 {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.job ul {
+  padding-left: 2rem;
+}
+
+.job li {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  position: relative;
+}
+
+.job li::before {
+  content: '▸';
+  color: var(--text-accent);
+  font-weight: bold;
+  position: absolute;
+  left: -20px;
+}
+
+/* --- RESPONSIVIDADE AVANÇADA --- */
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: 320px 1fr;
+    margin: 1rem;
+  }
+
+  .main-content {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    padding: 2rem;
+  }
+
+  .profile-pic {
+    width: 140px;
+    height: 140px;
+  }
+
+  .name {
+    font-size: 1.8rem;
+  }
+
+  .main-content {
+    padding: 1.5rem;
+  }
+
+  .main-content section {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 0;
+  }
+
+  .sidebar {
+    padding: 1.5rem;
+  }
+
+  .profile-pic {
+    width: 120px;
+    height: 120px;
+  }
+
+  .name {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .main-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .job-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .job-header span {
+    align-self: flex-start;
+  }
+
+  .contact-list a {
+    word-break: break-all;
+  }
+
+  .job-header span {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+  }
+}
+
+/* --- MELHORIAS DE ACESSIBILIDADE --- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card-bg: rgba(44, 62, 80, 0.95);
+    --text-primary: #ecf0f1;
+    --text-secondary: #bdc3c7;
+    --glass-bg: rgba(0, 0, 0, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+  .main-content section {
+    background: #232a36;
+    color: #f3f4f6;
+    border: 1.5px solid #374151;
+  }
+  .main-content h2 {
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+  .job {
+    background: #2d3748;
+    color: #f3f4f6;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+  .job-header h3,
+  .job-header span,
+  .job h4,
+  .job li {
+    color: #f3f4f6 !important;
+  }
+  .job-header span {
+    background: #334155;
+    color: #60a5fa !important;
+  }
+}
+
+/* --- FOCUS VISIBLE PARA ACESSIBILIDADE --- */
+.skills-list li:focus,
+.contact-list li:focus,
+.job:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+/* --- ANIMAÇÕES DE ENTRADA --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sidebar-content,
+.main-content section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.main-content section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.main-content section:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* --- ESTADOS DE HOVER MELHORADOS --- */
+.sidebar-section:hover .sidebar-section h3 {
+  color: var(--text-accent);
+}
+
+.contact-list li:hover i {
+  transform: scale(1.1);
+}
+
+/* --- ESTILOS PARA LINKS --- */
+.contact-list a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: var(--transition);
+  border-bottom: 1px solid transparent;
+}
+
+.contact-list a:hover {
+  color: var(--text-accent);
+  border-bottom-color: var(--text-accent);
+}
+
+.contact-list a:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --- MELHORIAS DE CONTRASTE E ACESSIBILIDADE --- */
+.sidebar-section strong {
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+/* --- ESTADOS DE FOCUS MELHORADOS --- */
+.skills-list li:focus,
+.contact-list li:focus,
+.job:focus {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* --- SCROLLBAR PERSONALIZADA --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-gradient);
+}
